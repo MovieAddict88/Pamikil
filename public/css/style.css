@@ -1,0 +1,36 @@
+/* STYLE.CSS - ANARCHY IN THE STYLESHEET */
+@import url('https://fonts.googleapis.com/css2?family=Road+Rage&display=swap');
+
+body {
+  background-color: #000000;
+  color: #ff00ff;
+  font-family: 'Road Rage', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* No sellout side-scrolling */
+}
+
+h1 {
+  font-size: clamp(3rem, 10vw, 8rem);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+  animation: flicker 1.5s infinite alternate;
+}
+
+p {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  letter-spacing: 0.1em;
+  color: #00ff00; /* Acid green for the cause */
+}
+
+/* FLICKER LIKE A BROKEN NEON SIGN */
+@keyframes flicker {
+  0%, 100% {
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+  }
+  50% {
+    text-shadow: none;
+  }
+}
