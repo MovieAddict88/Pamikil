@@ -1,0 +1,18 @@
+# Runtime config (copy from app/config/config.example.php)
+/app/config/config.php
+
+# Logs
+/logs/
+
+# Uploads
+/uploads/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Node / build artifacts (not used, but safe)
+node_modules/
+

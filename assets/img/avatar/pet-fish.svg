@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Fish pet">
+  <g>
+    <path d="M60 110c20-26 60-26 80 0-20 26-60 26-80 0z" fill="#38bdf8" stroke="#075985" stroke-width="6"/>
+    <path d="M140 110l30-20v40z" fill="#0ea5e9" stroke="#075985" stroke-width="6" stroke-linejoin="round"/>
+    <circle cx="86" cy="106" r="5" fill="#111"/>
+    <path d="M90 120c10 10 20 10 30 0" stroke="#111" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M76 90c8-10 22-12 34-6" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.8"/>
+  </g>
+</svg>

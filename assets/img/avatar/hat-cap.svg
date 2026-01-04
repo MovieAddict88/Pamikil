@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Cap">
+  <g>
+    <path d="M50 92c10-30 40-42 50-42s40 12 50 42" fill="#ef4444" stroke="#7f1d1d" stroke-width="6" stroke-linecap="round"/>
+    <path d="M42 98h116c6 0 10 4 10 10s-4 10-10 10H42c-6 0-10-4-10-10s4-10 10-10z" fill="#f87171" stroke="#7f1d1d" stroke-width="6"/>
+    <path d="M120 112c40 0 58 8 58 18s-18 18-58 18" fill="#f87171" stroke="#7f1d1d" stroke-width="6" stroke-linecap="round"/>
+  </g>
+</svg>

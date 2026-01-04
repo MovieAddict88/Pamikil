@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Bird pet">
+  <g>
+    <circle cx="120" cy="120" r="34" fill="#22c55e" stroke="#065f46" stroke-width="6"/>
+    <circle cx="132" cy="112" r="5" fill="#111"/>
+    <path d="M140 120l22 8-22 8z" fill="#fbbf24" stroke="#92400e" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M102 134c10 10 24 10 34 0" stroke="#111" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M98 120c-18-10-28-30-22-52 22 6 42 18 46 38" fill="#86efac" stroke="#065f46" stroke-width="6" stroke-linejoin="round"/>
+  </g>
+</svg>
