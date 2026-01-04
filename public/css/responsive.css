@@ -1,0 +1,352 @@
+/**
+ * Responsive Styles
+ * Mobile-first responsive design with breakpoints
+ */
+
+/* ============================================================
+   Breakpoints
+   ============================================================ */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 575.98px) {
+    :root {
+        --spacing-xxl: 2rem;
+    }
+    
+    /* Hero Section */
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: var(--spacing-xl) 0;
+    }
+    
+    .hero-content {
+        max-width: 100%;
+        order: 2;
+    }
+    
+    .hero-illustration {
+        order: 1;
+        min-height: 300px;
+    }
+    
+    .floating-shape {
+        width: 100px;
+        height: 100px;
+    }
+    
+    /* Forms */
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Navigation */
+    .navbar-collapse {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: var(--spacing-lg);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .navbar-collapse.active {
+        display: flex;
+    }
+    
+    .navbar-nav {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .navbar-actions {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .navbar-toggler {
+        display: flex;
+    }
+    
+    /* Grid */
+    .grid-2, .grid-3, .grid-4, .grid-5, .grid-6 {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Cards */
+    .features-grid,
+    .subjects-grid,
+    .activities-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Auth */
+    .auth-container {
+        padding: var(--spacing-md);
+    }
+    
+    /* Activities */
+    .quiz-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .drag-drop-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .draggable-item,
+    .drop-zone {
+        text-align: center;
+    }
+    
+    /* CTA */
+    .cta-buttons {
+        flex-direction: column;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    
+    .features-grid,
+    .subjects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .activities-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    
+    .features-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .subjects-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .activities-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    
+    .features-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .subjects-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .activities-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ============================================================
+   Touch Device Optimizations
+   ============================================================ */
+@media (hover: none) and (pointer: coarse) {
+    /* Larger touch targets */
+    .btn {
+        padding: var(--spacing-md) var(--spacing-xl);
+        min-height: 48px;
+    }
+    
+    .quiz-option {
+        padding: var(--spacing-lg) var(--spacing-lg);
+    }
+    
+    .nav-link {
+        padding: var(--spacing-md);
+    }
+    
+    /* Remove hover effects */
+    .card:hover,
+    .activity-card:hover,
+    .feature-card:hover,
+    .subject-card:hover {
+        transform: none;
+    }
+}
+
+/* ============================================================
+   Print Styles
+   ============================================================ */
+@media print {
+    .navbar,
+    .site-footer,
+    .a11y-controls,
+    .btn,
+    .cta-section {
+        display: none;
+    }
+    
+    body {
+        background: white;
+    }
+    
+    .card {
+        box-shadow: none;
+        border: 1px solid #e0e0e0;
+        page-break-inside: avoid;
+    }
+    
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+}
+
+/* ============================================================
+   High Contrast Mode
+   ============================================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --primary: #000080;
+        --success: #008000;
+        --warning: #808000;
+        --danger: #800000;
+    }
+    
+    .btn,
+    .form-control {
+        border: 2px solid;
+    }
+}
+
+/* ============================================================
+   Reduced Motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .floating-shape {
+        animation: none;
+    }
+}
+
+/* ============================================================
+   Dark Mode (if enabled by system)
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+    /* Can add dark mode variables here when needed */
+}
+
+/* ============================================================
+   Landscape Orientation Adjustments
+   ============================================================ */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero-illustration {
+        min-height: 250px;
+    }
+    
+    .flashcard {
+        min-height: 250px;
+    }
+}
+
+/* ============================================================
+   Font Size Scaling for High DPI
+   ============================================================ */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Adjust any bitmap image sizes if needed */
+}
+
+/* ============================================================
+   Tablet Specific
+   ============================================================ */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .hero-title {
+        font-size: clamp(2rem, 5vw, 2.5rem);
+    }
+    
+    .section-title {
+        font-size: clamp(1.75rem, 4vw, 2.25rem);
+    }
+}
+
+/* ============================================================
+   Mobile Specific (375px - 428px typical)
+   ============================================================ */
+@media (max-width: 428px) {
+    :root {
+        --font-size-base: 1rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .feature-icon,
+    .subject-icon {
+        font-size: 3rem;
+        width: 60px;
+        height: 60px;
+    }
+    
+    .user-button .user-name {
+        display: none;
+    }
+    
+    .dropdown-menu {
+        min-width: 180px;
+        right: 0;
+    }
+}
+
+/* ============================================================
+   Very Small Screens (< 320px)
+   ============================================================ */
+@media (max-width: 319px) {
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .btn-lg {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: var(--font-size-base);
+    }
+}
+
+/* ============================================================
+   Ultra Wide Screens (> 1920px)
+   ============================================================ */
+@media (min-width: 1921px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    :root {
+        --font-size-base: 1.25rem;
+    }
+}
