@@ -1,0 +1,45 @@
+RewriteEngine On
+RewriteBase /
+
+# Redirect to HTTPS (optional, uncomment if needed)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST%}%{REQUEST_URI} [L,R=301]
+
+# Block access to sensitive files
+<FilesMatch "^(config|includes|install).*\.php$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Allow specific public files
+<FilesMatch "^(index|watch|search|category|login|register|logout)\.php$">
+    Order allow,deny
+    Allow from all
+</FilesMatch>
+
+# Protect config directory
+<IfModule mod_rewrite.c>
+    RewriteRule ^config/ - [F,L]
+</IfModule>
+
+# Pretty URLs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^movie/([a-zA-Z0-9-]+)$ watch.php?slug=$1 [L,QSA]
+RewriteRule ^category/([a-zA-Z0-9-]+)$ category.php?slug=$1 [L,QSA]
+RewriteRule ^search$ search.php [L,QSA]
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# PHP settings
+<IfModule mod_php7.c>
+    php_value upload_max_filesize 2048M
+    php_value post_max_size 2048M
+    php_value max_execution_time 3600
+    php_value max_input_time 3600
+</IfModule>
