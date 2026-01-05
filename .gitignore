@@ -1,0 +1,39 @@
+# Configuration
+config.php
+
+# Database
+*.sql
+*.sqlite
+
+# Cache and logs
+/cache/*
+/logs/*
+*.log
+
+# Uploads
+/uploads/*
+!/uploads/.gitkeep
+
+# OS Files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
+
+# Node modules (if using any build tools)
+node_modules/
+
+# Environment
+.env
+.env.local
+
+# Installation script (remove after installation)
+# install.php
+# generate-icons.php
