@@ -1,0 +1,16 @@
+{
+  "name": "CineCraze",
+  "short_name": "CineCraze",
+  "start_url": "/index.php",
+  "display": "standalone",
+  "background_color": "#0f0f0f",
+  "theme_color": "#e50914",
+  "icons": [
+    {
+      "src": "/assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

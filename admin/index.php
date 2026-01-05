@@ -1,4 +1,10 @@
-      <!DOCTYPE html>
+<?php
+declare(strict_types=1);
+require __DIR__ . '/../includes/app.php';
+app_require_install();
+admin_require_login();
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <title>Playlist Categories Manager</title>
+    <title>CineCraze Admin Dashboard</title>
     <style>
         :root {
             --primary: #e50914;
@@ -65,6 +71,38 @@
             box-shadow: var(--shadow-primary);
             position: relative;
             overflow: hidden;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .logout-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.22);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            background: rgba(0,0,0,0.18);
+            transition: all 0.25s ease;
+        }
+
+        .logout-link:hover {
+            background: rgba(0,0,0,0.35);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 680px) {
+            .header-top {
+                flex-direction: column;
+            }
         }
         
         header::before {
@@ -1761,8 +1799,11 @@ jobs:
 <body>
     <div class="container">
         <header>
-            <h1>📁 Playlist Categories Manager</h1>
-            <p class="subtitle">Manage content in Categories structure with Movies, TV Series, and Live TV</p>
+            <div class="header-top">
+                <h1>CineCraze Admin Dashboard</h1>
+                <a class="logout-link" href="/admin/logout.php">Logout</a>
+            </div>
+            <p class="subtitle">Manage Movies, TV Series and Live TV. Changes are saved to MySQL and instantly available on the public site.</p>
         </header>
 
         <!-- TMDB Generator Tab -->
@@ -2981,6 +3022,43 @@ const TWOTWOEMBED_BASE = 'https://2embed.cc/embed';
         let nextId = 1;
         let currentPage = 1;
         const itemsPerPage = 50;
+
+        const ADMIN_CATALOG_ENDPOINT = '/api/admin/catalog.php';
+
+        async function syncToServer() {
+            try {
+                const response = await fetch(ADMIN_CATALOG_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(currentData)
+                });
+
+                if (!response.ok) {
+                    const text = await response.text();
+                    throw new Error(text || 'Server sync failed');
+                }
+
+                return true;
+            } catch (e) {
+                console.warn('Server sync failed:', e);
+                showStatus('warning', 'Saved locally, but could not sync to MySQL (check login / connection).');
+                return false;
+            }
+        }
+
+        async function loadFromServer() {
+            try {
+                const response = await fetch(ADMIN_CATALOG_ENDPOINT, { cache: 'no-store' });
+                if (!response.ok) return null;
+                const data = await response.json();
+                if (data && data.Categories && Array.isArray(data.Categories)) {
+                    return data;
+                }
+            } catch (e) {
+                console.warn('Server load failed:', e);
+            }
+            return null;
+        }
 
         const debouncedUpdatePreview = debounce(() => {
             currentPage = 1; // Reset to first page on new search
@@ -6689,6 +6767,7 @@ Proceed with removal?`;
                         localStorage.setItem('playlist-data-compressed', 'true');
                         console.log('✅ Data saved to localStorage with compression');
                         useIndexedDB = false;
+                        await syncToServer();
                         return;
                     } catch (localStorageError) {
                         console.warn('⚠️ localStorage failed, trying IndexedDB:', localStorageError.message);
@@ -6710,6 +6789,7 @@ Proceed with removal?`;
                 }
                 
                 console.log('✅ Data saved to IndexedDB successfully');
+                await syncToServer();
                 showStatus('success', `Large dataset (${dataSizeMB}MB) saved to IndexedDB successfully!`);
                 
             } catch (error) {
@@ -6730,6 +6810,14 @@ Proceed with removal?`;
         }
         async function loadSavedData() {
             try {
+                const serverData = await loadFromServer();
+                if (serverData) {
+                    currentData = serverData;
+                    useIndexedDB = false;
+                    console.log('✅ Data loaded from MySQL');
+                    return;
+                }
+
                 // Check if data is stored in IndexedDB
                 if (localStorage.getItem('playlist-data-indexeddb') === 'true') {
                     console.log('📦 Loading data from IndexedDB...');
