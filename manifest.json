@@ -1,0 +1,136 @@
+{
+    "name": "CineCraze - Premium Movie Streaming",
+    "short_name": "CineCraze",
+    "description": "Watch movies, TV series, and live TV streaming online",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a0a0a",
+    "theme_color": "#e50914",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en-US",
+    "dir": "ltr",
+    "categories": ["entertainment", "multimedia", "video"],
+    "icons": [
+        {
+            "src": "/icons/icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/icons/icon-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/icons/icon-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/icons/icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/icons/icon-152x152.png",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/icons/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable any"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Movies",
+            "short_name": "Movies",
+            "description": "Browse movies",
+            "url": "/?tab=movies",
+            "icons": [
+                {
+                    "src": "/icons/icon-192x192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "TV Series",
+            "short_name": "Series",
+            "description": "Browse TV series",
+            "url": "/?tab=series",
+            "icons": [
+                {
+                    "src": "/icons/icon-192x192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "Live TV",
+            "short_name": "Live TV",
+            "description": "Watch live channels",
+            "url": "/?tab=live",
+            "icons": [
+                {
+                    "src": "/icons/icon-192x192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "Watch Later",
+            "short_name": "Watch Later",
+            "description": "View saved content",
+            "url": "/?tab=watchlater",
+            "icons": [
+                {
+                    "src": "/icons/icon-192x192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/screenshots/home-screen.png",
+            "sizes": "640x1136",
+            "type": "image/png",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "/screenshots/desktop-screen.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "form_factor": "wide"
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "protocol_handlers": [
+        {
+            "protocol": "web+cinecraze",
+            "url": "/open?url=%s"
+        }
+    ]
+}
