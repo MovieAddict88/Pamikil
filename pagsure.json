@@ -1,0 +1,19 @@
+{
+  "Categories": [
+    {
+      "MainCategory": "Movies",
+      "SubCategories": ["Action", "Drama", "Comedy"],
+      "Entries": []
+    },
+    {
+      "MainCategory": "TV Series",
+      "SubCategories": ["Drama", "Comedy"],
+      "Entries": []
+    },
+    {
+      "MainCategory": "Live TV",
+      "SubCategories": ["Entertainment"],
+      "Entries": []
+    }
+  ]
+}

@@ -1,8 +1,18 @@
+<?php
+declare(strict_types=1);
+require __DIR__ . '/includes/app.php';
+app_require_install();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#e50914">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="apple-touch-icon" href="/assets/icons/icon.svg">
     <title>CineCraze</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
@@ -24,6 +34,7 @@
             --radius: 8px;
             --header-height: 70px;
             --footer-height: 120px;
+            --bottom-tabs-height: clamp(62px, 8vh, 92px);
             --youtube-red: #ff0000;
             --youtube-dark: #0f0f0f;
             --youtube-gray: #272727;
@@ -45,6 +56,7 @@
             color: var(--light);
             overflow-x: hidden;
             transition: background-color 0.3s ease;
+            padding-bottom: calc(var(--bottom-tabs-height) + env(safe-area-inset-bottom));
         }
 
         /* Header Styles */
@@ -607,51 +619,54 @@
         }
 
 
-        /* UPDATED: Server selector inside player - Smaller and less opaque */
+        /* Server selector inside player – professional (responsive) */
         .player-server-selector {
             position: absolute;
-            top: 8px; /* Adjusted for smaller size */
-            right: 8px; /* Adjusted for smaller size */
+            top: 12px;
+            right: 12px;
             z-index: 10;
-            background: rgba(20, 20, 20, 0.5); /* Slightly more transparent */
-            border-radius: 3px;
-            padding: 3px 5px; /* Reduced padding */
+            background: rgba(15, 15, 15, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 14px;
+            padding: 8px 10px;
             display: flex;
             align-items: center;
-            opacity: 0.6; /* Default reduced opacity */
-            transition: opacity 0.3s ease;
+            gap: 8px;
+            opacity: 0.92;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            transition: var(--transition);
         }
 
         .player-container:hover .player-server-selector,
         .player-server-selector:hover,
         .player-server-selector select:focus {
-            opacity: 1; /* Full opacity on hover/focus */
+            opacity: 1;
         }
 
         .player-server-selector select {
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--youtube-light-gray);
-            padding: 4px 6px; /* Reduced padding */
-            border-radius: 3px;
-            font-size: 11px; /* Reduced font size */
+            color: var(--light);
+            padding: 6px 10px;
+            border-radius: 12px;
+            font-size: clamp(0.75rem, 1.4vw, 0.9rem);
             cursor: pointer;
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
-            width: 70px; /* Slightly reduced width */
+            width: clamp(110px, 18vw, 170px);
             outline: none;
         }
 
         .player-server-selector select:focus {
             border-color: var(--youtube-red);
-            background: rgba(0,0,0,0.3);
+            box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.25);
         }
 
         .player-server-selector i {
-            margin-left: 4px;
-            color: var(--youtube-light-gray);
-            font-size: 10px; /* Reduced icon size */
+            color: rgba(255, 255, 255, 0.75);
+            font-size: clamp(0.75rem, 1.4vw, 0.9rem);
         }
 
         /* UPDATED: Viewer Content - YouTube Style Grid Layout */
@@ -1604,7 +1619,106 @@
             display: block; /* Use a class to control display for transitions */
             opacity: 1;
         }
-        
+
+        /* Bottom Tab Bar (Home / Movies / Series / Live TV / Watch Later) */
+        .bottom-tabs {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: var(--bottom-tabs-height);
+            padding: 8px max(10px, env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-right));
+            background: rgba(15, 15, 15, 0.88);
+            border-top: 1px solid var(--youtube-gray);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 8px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            border: none;
+            background: transparent;
+            color: var(--youtube-light-gray);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 6px;
+            border-radius: 14px;
+            transition: var(--transition);
+            font-size: clamp(0.65rem, 1.6vw, 0.85rem);
+            line-height: 1;
+            font-weight: 600;
+        }
+
+        .tab-btn i {
+            font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+        }
+
+        .tab-btn.active {
+            color: var(--light);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .tab-btn.active i {
+            color: var(--youtube-red);
+        }
+
+        @media (min-width: 1100px) {
+            .bottom-tabs {
+                width: min(980px, 96vw);
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+                border-radius: 22px 22px 0 0;
+            }
+        }
+
+        /* Watch Later button on cards */
+        .content-card {
+            position: relative;
+        }
+
+        .watchlater-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+        }
+
+        .watchlater-btn:hover {
+            transform: translateY(-1px);
+            background: rgba(0, 0, 0, 0.75);
+        }
+
+        .watchlater-btn.active {
+            background: rgba(229, 9, 20, 0.88);
+            border-color: rgba(229, 9, 20, 0.95);
+        }
+
+        /* Hide carousel/filters when in Watch Later tab */
+        body.tab-watchlater .carousel,
+        body.tab-watchlater .filters-section {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
@@ -1861,6 +1975,14 @@
         </div>
     </footer>
 
+    <nav class="bottom-tabs" aria-label="Bottom Navigation">
+        <button class="tab-btn active" data-tab="home" type="button"><i class="fas fa-house"></i><span>Home</span></button>
+        <button class="tab-btn" data-tab="movies" type="button"><i class="fas fa-film"></i><span>Movies</span></button>
+        <button class="tab-btn" data-tab="series" type="button"><i class="fas fa-tv"></i><span>Series</span></button>
+        <button class="tab-btn" data-tab="live" type="button"><i class="fas fa-satellite-dish"></i><span>Live TV</span></button>
+        <button class="tab-btn" data-tab="watchlater" type="button"><i class="fas fa-bookmark"></i><span>Watch Later</span></button>
+    </nav>
+
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     <script>
         if ('scrollRestoration' in history) {
@@ -1934,7 +2056,30 @@
         };
         
         // State
-        const DEFAULT_PLACEHOLDER_IMAGE = "https://movie-fcs.fwh.is/cinecraze/cinecraze.png";
+        const DEFAULT_PLACEHOLDER_IMAGE = "/assets/icons/icon.svg";
+        const CATALOG_ENDPOINT = "./api/catalog.php";
+        const CATALOG_CACHE_KEY = "cinecraze_catalog_cache_v1";
+        const WATCH_LATER_KEY = "cinecraze_watch_later_v1";
+
+        let activeTab = 'home';
+        let allContentFlat = [];
+
+        function loadWatchLaterSet() {
+            try {
+                const raw = localStorage.getItem(WATCH_LATER_KEY);
+                const parsed = raw ? JSON.parse(raw) : [];
+                return new Set(Array.isArray(parsed) ? parsed : []);
+            } catch {
+                return new Set();
+            }
+        }
+
+        function persistWatchLaterSet(set) {
+            localStorage.setItem(WATCH_LATER_KEY, JSON.stringify([...set]));
+        }
+
+        let watchLaterSet = loadWatchLaterSet();
+
         let currentView = 'grid';
         let currentContentInfo = {}; // To store current viewed content info for save/like
         let currentContent = [];
@@ -1943,8 +2088,8 @@
         let currentEpisode = null;
         let currentSeason = null;
         let currentSeries = null;
-let isMobileSearchForcedHidden = false; // Flag for mobile search visibility after fullscreen exit
-        
+        let isMobileSearchForcedHidden = false; // Flag for mobile search visibility after fullscreen exit
+
         // Function to shuffle an array
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -1970,50 +2115,148 @@ let isMobileSearchForcedHidden = false; // Flag for mobile search visibility aft
             });
         }
         
+        function registerPWA() {
+            if (!('serviceWorker' in navigator)) return;
+
+            navigator.serviceWorker.register('/service-worker.js').catch(err => {
+                console.warn('Service Worker registration failed:', err);
+            });
+        }
+
+        function setupBottomTabs() {
+            document.querySelectorAll('.bottom-tabs .tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    setActiveTab(btn.dataset.tab);
+                });
+            });
+        }
+
+        function setActiveTab(tab) {
+            if (!tab) return;
+
+            activeTab = tab;
+
+            document.querySelectorAll('.bottom-tabs .tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tab);
+            });
+
+            document.body.classList.toggle('tab-watchlater', tab === 'watchlater');
+            document.body.classList.toggle('tab-home', tab === 'home');
+            document.body.classList.toggle('tab-movies', tab === 'movies');
+            document.body.classList.toggle('tab-series', tab === 'series');
+            document.body.classList.toggle('tab-live', tab === 'live');
+
+            if (tab === 'watchlater') {
+                renderWatchLater();
+                return;
+            }
+
+            // Drive existing filters from tabs
+            if (tab === 'movies') elements.categoryFilter.value = 'movies';
+            else if (tab === 'series') elements.categoryFilter.value = 'series';
+            else if (tab === 'live') elements.categoryFilter.value = 'live';
+            else elements.categoryFilter.value = 'all';
+
+            renderContent();
+        }
+
+        function buildAllContentFlat() {
+            allContentFlat = [];
+            if (!cineData || !cineData.Categories) return;
+
+            cineData.Categories.forEach(cat => {
+                cat.Entries.forEach(entry => {
+                    allContentFlat.push({
+                        ...entry,
+                        type: cat.MainCategory.toLowerCase().includes('movie') ? 'movie' :
+                            cat.MainCategory.toLowerCase().includes('series') ? 'series' : 'live'
+                    });
+                });
+            });
+        }
+
+        function renderWatchLater() {
+            currentPage = 1;
+            const list = allContentFlat.filter(item => watchLaterSet.has(item.Title));
+            currentContent = list;
+            totalPages = Math.ceil(currentContent.length / ITEMS_PER_PAGE);
+            cachedContent = [...currentContent];
+            renderCurrentView();
+            updateLoadMoreButton();
+            setupLazyLoading();
+        }
+
+        function toggleWatchLater(title) {
+            if (!title) return;
+            if (watchLaterSet.has(title)) watchLaterSet.delete(title);
+            else watchLaterSet.add(title);
+            persistWatchLaterSet(watchLaterSet);
+
+            if (activeTab === 'watchlater') {
+                renderWatchLater();
+            }
+        }
+
         // Initialize the app
         function init() {
+            registerPWA();
+            setupBottomTabs();
+
             fetchData().then(() => {
+                buildAllContentFlat();
                 renderCarousel();
                 renderContentFilters();
                 renderContent();
                 setupEventListeners();
                 updateCarousel();
                 setupLazyLoading();
+                setActiveTab(activeTab);
                 history.replaceState({ page: 'browse' }, 'Browse Content', window.location.pathname + window.location.search);
             });
         }
-        
-        // Fetch data from API or local file
+
+        // Fetch data from CineCraze PHP/MySQL API with offline fallbacks
         async function fetchData() {
+            elements.loadingSpinner.style.display = 'block';
+
             try {
-                elements.loadingSpinner.style.display = 'block';
-                
-                const response = await fetch("https://movie-fcs.fwh.is/cinecraze/pagsure.json");
-                if (!response.ok) throw new Error("Online source failed");
-                
+                const response = await fetch(CATALOG_ENDPOINT, { cache: 'no-store' });
+                if (!response.ok) throw new Error('Catalog API failed');
+
                 cineData = await response.json();
-                console.log("✅ Loaded from ONLINE source");
-                
-                // Fix data inconsistencies
+                localStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(cineData));
+                console.log('✅ Loaded from MySQL API');
                 fixDataInconsistencies();
+                return;
             } catch (err) {
-                console.warn("⚠️ Online source failed, trying offline...", err);
-                
-                try {
-                    const offlineResponse = await fetch("./pagsure.json");
-                    if (!offlineResponse.ok) throw new Error("Offline file not found");
-                    
-                    cineData = await offlineResponse.json();
-                    console.log("✅ Loaded from OFFLINE file");
-                    
-                    // Fix data inconsistencies
-                    fixDataInconsistencies();
-                } catch (err2) {
-                    console.error("❌ Both online and offline data failed to load.", err2);
-                    alert("Data loading failed. Please check your internet or local file.");
-                }
+                console.warn('⚠️ API load failed, falling back…', err);
             } finally {
                 elements.loadingSpinner.style.display = 'none';
+            }
+
+            // localStorage cache
+            try {
+                const cached = localStorage.getItem(CATALOG_CACHE_KEY);
+                if (cached) {
+                    cineData = JSON.parse(cached);
+                    console.log('✅ Loaded from local cache');
+                    fixDataInconsistencies();
+                    return;
+                }
+            } catch (e) {
+                console.warn('Cache read failed:', e);
+            }
+
+            // last-resort bundled file
+            try {
+                const offlineResponse = await fetch('./pagsure.json');
+                if (!offlineResponse.ok) throw new Error('Offline file not found');
+                cineData = await offlineResponse.json();
+                console.log('✅ Loaded from bundled pagsure.json');
+                fixDataInconsistencies();
+            } catch (err2) {
+                console.error('❌ All catalog sources failed.', err2);
+                alert('Data loading failed. Please run /install.php and check the database connection.');
             }
         }
         
@@ -2303,7 +2546,14 @@ let isMobileSearchForcedHidden = false; // Flag for mobile search visibility aft
             card.className = `content-card ${viewType}`;
             card.dataset.id = item.Title.replace(/\s+/g, '-').toLowerCase();
             card.dataset.type = item.type;
-            
+
+            const isInWatchLater = watchLaterSet.has(item.Title);
+            const watchLaterBtn = `
+                <button type="button" class="watchlater-btn ${isInWatchLater ? 'active' : ''}" aria-label="Watch later">
+                    <i class="fas fa-bookmark"></i>
+                </button>
+            `;
+
             // Create badge based on content type
             let badge = '';
             if (item.type === 'movie') {
@@ -2313,12 +2563,13 @@ let isMobileSearchForcedHidden = false; // Flag for mobile search visibility aft
             } else if (item.type === 'live') {
                 badge = '<div class="card-badge badge-live">LIVE</div>';
             }
-            
+
             const imageSrc = (item.Thumbnail || item.Poster) ? (item.Thumbnail || item.Poster) : DEFAULT_PLACEHOLDER_IMAGE;
             card.innerHTML = `
                 <div class="card-img">
                     <img data-src="${imageSrc}" alt="${item.Title}" class="lazy-image" loading="lazy">
                     ${badge}
+                    ${watchLaterBtn}
                 </div>
                 <div class="card-info">
                     <h3 class="card-title">${item.Title}</h3>
@@ -2326,7 +2577,14 @@ let isMobileSearchForcedHidden = false; // Flag for mobile search visibility aft
                     ${viewType === 'list' ? `<p class="card-description">${item.Description || ''}</p>` : ''}
                 </div>
             `;
-            
+
+            const btn = card.querySelector('.watchlater-btn');
+            btn?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleWatchLater(item.Title);
+                btn.classList.toggle('active', watchLaterSet.has(item.Title));
+            });
+
             card.addEventListener('click', () => openViewer(item));
             return card;
         }
