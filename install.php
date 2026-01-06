@@ -58,11 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
 
             $pdo->exec(
-                'CREATE TABLE IF NOT EXISTS app_settings (\n'
-                . '  setting_key VARCHAR(191) NOT NULL PRIMARY KEY,\n'
-                . '  setting_value LONGTEXT NOT NULL,\n'
-                . '  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n'
-                . ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4'
+                'CREATE TABLE IF NOT EXISTS app_settings (
+                  setting_key VARCHAR(191) NOT NULL PRIMARY KEY,
+                  setting_value LONGTEXT NOT NULL,
+                  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4'
             );
 
             $defaultCatalogPath = __DIR__ . '/pagsure.json';
