@@ -93,8 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $adminHash = password_hash($values['admin_password'], PASSWORD_DEFAULT);
 
             $stmt = $pdo->prepare(
-                'INSERT INTO app_settings (setting_key, setting_value) VALUES (:k, :v)\n'
-                . 'ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value), updated_at = CURRENT_TIMESTAMP'
+                'INSERT INTO app_settings (setting_key, setting_value) VALUES (:k, :v)
+                ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value), updated_at = CURRENT_TIMESTAMP'
             );
 
             $stmt->execute(['k' => 'catalog_json', 'v' => (string)$catalogJson]);
