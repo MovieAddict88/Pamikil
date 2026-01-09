@@ -1,0 +1,17 @@
+# PWA Icons Directory
+# 
+# To make the PWA fully functional, add the following icon files:
+# - icon-72.png (72x72)
+# - icon-96.png (96x96)
+# - icon-128.png (128x128)
+# - icon-144.png (144x144)
+# - icon-152.png (152x152)
+# - icon-192.png (192x192)
+# - icon-384.png (384x384)
+# - icon-512.png (512x512)
+# - screenshot1.png (540x720)
+#
+# You can use a tool like https://realfavicongenerator.net/ to generate these icons
+# or create them manually with your preferred design tool.
+#
+# For now, the PWA will work but may show default icons.
