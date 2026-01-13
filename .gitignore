@@ -1,0 +1,5 @@
+# Ignore sensitive configuration files
+config/config.php
+
+# Ignore installation lock file
+install/install.lock
