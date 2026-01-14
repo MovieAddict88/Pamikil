@@ -1,0 +1,58 @@
+# Pamikil Car Management System - Apache Configuration
+
+# Prevent directory listing
+Options -Indexes
+
+# Protect configuration files
+<FilesMatch "^(config\.php|database\.php)\.php$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protect sensitive directories
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protect logs directory
+<IfModule mod_authz_core.c>
+    <Directory "logs">
+        Require all denied
+    </Directory>
+</IfModule>
+
+# Force HTTPS (uncomment on production)
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Set default character set
+AddDefaultCharset UTF-8
+
+# Enable Gzip compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Set cache headers for static files
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+</IfModule>
+
+# Protect against MIME type sniffing
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Increase upload limits (if server allows)
+php_value upload_max_filesize 5M
+php_value post_max_size 6M

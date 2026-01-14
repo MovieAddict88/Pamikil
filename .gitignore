@@ -1,0 +1,34 @@
+# Uploads directory
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# Reports directory
+/public/reports/*
+!/public/reports/.gitkeep
+
+# Logs directory
+/logs/*
+!/logs/.gitkeep
+
+# Configuration with sensitive data
+/config/config.local.php
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+~
+
+# Temporary files
+*.tmp
+*.temp
