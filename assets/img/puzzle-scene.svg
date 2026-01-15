@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Puzzle scene">
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#60a5fa"/>
+      <stop offset="1" stop-color="#dbeafe"/>
+    </linearGradient>
+    <linearGradient id="grass" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#4ade80"/>
+      <stop offset="1" stop-color="#166534"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="180" fill="url(#sky)"/>
+  <rect y="180" width="400" height="120" fill="url(#grass)"/>
+
+  <circle cx="320" cy="70" r="28" fill="#fbbf24" stroke="#b45309" stroke-width="6"/>
+  <path d="M40 210c50-70 120-70 170 0" fill="#16a34a" opacity="0.35"/>
+
+  <g transform="translate(70 165)">
+    <rect x="0" y="-40" width="70" height="40" rx="8" fill="#ef4444" stroke="#7f1d1d" stroke-width="4"/>
+    <rect x="8" y="-55" width="54" height="20" rx="8" fill="#111827" opacity="0.45"/>
+    <circle cx="18" cy="0" r="10" fill="#111827"/>
+    <circle cx="52" cy="0" r="10" fill="#111827"/>
+  </g>
+
+  <g transform="translate(210 210)">
+    <path d="M0 0c30-20 60-20 90 0v35H0z" fill="#a78bfa" stroke="#4c1d95" stroke-width="4"/>
+    <rect x="10" y="-30" width="70" height="30" rx="12" fill="#c4b5fd" stroke="#4c1d95" stroke-width="4"/>
+    <circle cx="28" cy="-15" r="4" fill="#111"/>
+    <circle cx="62" cy="-15" r="4" fill="#111"/>
+    <path d="M35 -5c6 6 14 6 20 0" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <text x="18" y="28" font-family="system-ui, Arial" font-weight="800" font-size="18" fill="#111827" opacity="0.65">Make the picture!</text>
+</svg>
