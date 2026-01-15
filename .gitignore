@@ -1,0 +1,55 @@
+# Car Management System - Git Ignore
+
+# Uploaded Files
+assets/uploads/vehicles/*
+!assets/uploads/vehicles/.gitkeep
+
+# Logs
+logs/*
+!logs/.gitkeep
+*.log
+
+# Configuration (comment out if you want to track config)
+# config/database.php
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary Files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# PHP Cache
+*.cache
+
+# Database Dumps (local backups)
+*.sql.gz
+*.sql.zip
+backups/
+
+# Environment Files
+.env
+.env.local
+.env.production
+
+# Composer (if used later)
+/vendor/
+composer.lock
+
+# NPM (if used later)
+node_modules/
+package-lock.json
+
+# Session Files
+sess_*
