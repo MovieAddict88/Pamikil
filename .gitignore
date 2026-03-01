@@ -1,0 +1,40 @@
+# Configuration files
+config/database.php
+
+# Uploads directory
+uploads/movies/*
+uploads/posters/*
+uploads/temp/*
+!uploads/movies/.gitkeep
+!uploads/posters/.gitkeep
+!uploads/temp/.gitkeep
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+error_log
+debug.log
+
+# Temporary files
+*.tmp
+*.cache
+
+# Backup files
+*.bak
+*.backup
+*.sql
+
+# Environment files
+.env
+.env.local
